@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
-import TaskCard from "../../components/taskComponents/TaskCard";
+import TaskCard from "../../components/TaskCard";
 
 export default function ValidateTaskPage() {
   const [translateTasks, setTranslateTasks] = useState<Data | {}>({});

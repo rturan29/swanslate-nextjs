@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import React, { useState } from "react";
-import { Data } from "../../pages/validatetaskpage";
+import { Data } from "../pages/validatetaskpage";
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {

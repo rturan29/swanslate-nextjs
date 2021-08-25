@@ -1,15 +1,70 @@
-.sideBar {
-    flex-grow: 1;
-    background-color: "#ECECEC";
-    height: "96vh";
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  height: 96vh;
+  .ButtonGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    .btn {
+      font-size: 1rem;
+      margin: 1rem auto;
+      padding: 0;
+      width: 78px;
+      height: 78px;
+
+      &:hover {
+        box-shadow: none;
+        background-color: #ececec;
+        transition: transform 0.2s ease-in;
+        transform: translateY(-15px);
+      }
+    }
   }
-  .buttons {
-    width: "%100";
-    display: "flex";
-    flex-direction: "column";
-    margin-top: "100px",
+
+  .Logo {
+    display: block;
+    margin: 1rem auto;
+    width: 60%;
+    height: 80px;
+    transition: transform 0.2s ease-in;
+    padding: 0;
+
+    &:hover {
+      box-shadow: none;
+      background-color: #ececec;
+      transform: translateY(-15px);
+    }
   }
-  .btn {
-    font-size: "4rem";
-    margin: "1rem auto";
+}
+
+/* Tablets and under  */
+
+@media (max-width: 768px) {
+  .Container {
+    height: auto;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    .ButtonGroup {
+      width: auto;
+      margin: 5px;
+      flex-direction: row;
+      .btn {
+        height: 50px;
+      }
+    }
+    .Logo {
+      margin: 1rem 0;
+      height: 50px;
+      width: 100 px;
+    }
   }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+}

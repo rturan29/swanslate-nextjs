@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "../styles/Home.module.scss";
-import SideBarComponent from "./dashboard/SideBarComponent";
+import Styles from "../styles/Layout.module.scss";
+import SideBarComponent from "./SideBarComponent";
 
 type LayoutProps = {
   children?: React.ReactElement;
@@ -9,16 +9,16 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      <div className={styles.line}></div>
+      <div className={Styles.line}></div>
 
-      <div className={styles.container}>
-        <aside className={styles.sideBar}>
+      <div className={Styles.container}>
+        <aside className={Styles.sideBar}>
           <SideBarComponent />
         </aside>
-        <div className={styles.content}>{children}</div>
+        <div className={Styles.content}>{children}</div>
       </div>
 
-      <div className={styles.line}></div>
+      <div className={Styles.line}></div>
     </>
   );
 }
