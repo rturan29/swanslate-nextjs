@@ -1,9 +1,12 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Styles from "../styles/Home.module.scss";
 
 export default function Home() {
+  const [userAuth, setUserAuth] = useState(false);
+  const [userName, setUserName] = useState("")
+
   return (
     <div>
       <Head>
@@ -12,8 +15,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+      <Layout
+        setUserAuth={setUserAuth}
+        setUserName={setUserName}
+      >
         <>
+          {userAuth ? <h1>Welcome {userName}</h1> : null}
+
           <h1 className={Styles.motto}>
             Beatiful Translations
             <br />
