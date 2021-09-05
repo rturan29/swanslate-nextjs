@@ -1,12 +1,34 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {};
+export interface user {
+    isSignIn: boolean;
+    userAuth: {
+        userName: string,
+        accessToken: string,
+        uid: string;
+    },
+}
 
-const baseReducer = (state = initialState, { type, payload }: { type: string, payload: string; }) => {
-    switch (type) {
+const initialState: user = {
+    isSignIn: false,
+    userAuth: {
+        userName: "",
+        accessToken: "",
+        uid: ""
+    },
 
-        default:
-            return state;
-    }
 };
 
-export default baseReducer;
+export const taskSlice = createSlice({
+    name: 'translateTasks',
+    initialState,
+    reducers: {
+        userSignIn: (state, action: PayloadAction<user>) => {
+            state = action.payload;
+        }
+    },
+});
+
+export const { userSignIn } = taskSlice.actions;
+
+export default taskSlice.reducer;

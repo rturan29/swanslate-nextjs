@@ -1,11 +1,12 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Layout from "../components/Layout";
+import AppContext from "../lib/helpers/appContext";
 import Styles from "../styles/Home.module.scss";
 
+
 export default function Home() {
-  const [userAuth, setUserAuth] = useState(false);
-  const [userName, setUserName] = useState("")
+  const { state } = useContext(AppContext)
 
   return (
     <div>
@@ -15,15 +16,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout
-        setUserAuth={setUserAuth}
-        setUserName={setUserName}
-      >
+      <Layout>
         <>
-          {userAuth ? <h1>Welcome {userName}</h1> : null}
+          {state.userInfo.isSignIn ? <h1 className={Styles.subContent}>Welcome {state.userInfo.userAuth.userName}</h1> : null}
 
           <h1 className={Styles.motto}>
-            Beatiful Translations
+            Beautiful Translations
             <br />
             Instantly Delivered
           </h1>
@@ -37,3 +35,5 @@ export default function Home() {
     </div>
   );
 }
+
+

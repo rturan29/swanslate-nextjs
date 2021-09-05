@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-// import { Pi } from "@pinetwork-js/sdk";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { Button, IconButton, SvgIcon } from "@material-ui/core";
 import Image from "next/image";
@@ -9,35 +8,45 @@ import button2 from "../public/images/vt-2.png";
 import TaskPageIcon from "./icons/TaskPageIcon";
 import TranslateIcon from "../public/TranslateIcon.svg";
 import Styles from "../styles/SideBar.module.scss";
+import appContext from "../lib/helpers/appContext";
+import { SIGN_IN } from "../lib/helpers/contextReducer";
 
-export default function SideBarComponent(props: {
-  setUserAuth?: React.Dispatch<React.SetStateAction<boolean>>;
-  setUserName?: React.Dispatch<React.SetStateAction<string>>;
-}) {
+export default function SideBarComponent() {
+  const { state, dispatch } = useContext(appContext);
 
   async function handleSignIn() {
+
     await import("@pinetwork-js/sdk").then(async Pi => {
       try {
         const response = await Pi?.Pi?.authenticate(["username", "payments"], onIncompletePaymentFound);
-
         if (response?.user?.username) {
-          if (props.setUserAuth && props.setUserName) {
-            props.setUserAuth(true);
-            props.setUserName(response.user.username);
-          }
+          dispatch({
+            type: SIGN_IN,
+            payload: {
+              isSignIn: true,
+              userAuth: {
+                userName: response.user.username,
+                accessToken: response.accessToken,
+                uid: response.user.uid
+              }
+            }
+          });
         }
       } catch (e) {
-        console.log("fetch error", e);
+        console.log(e);
       }
     });
+
     function onIncompletePaymentFound(payment: any) { console.log(payment); };
   }
+
 
   return (
     <div className={Styles.Container}>
       <IconButton className={Styles.Logo}>
-        <Link href="/" passHref>
-          <Image src={logo} alt="logo" layout="fill" objectFit="contain" />
+        <Link href="/">
+          <a><Image src={logo} alt="logo" layout="fill" objectFit="contain" /></a>
+
         </Link>
       </IconButton>
       <Button
@@ -46,13 +55,16 @@ export default function SideBarComponent(props: {
         onClick={handleSignIn}>Sign In</Button>
       <div className={Styles.ButtonGroup}>
         <IconButton className={Styles.btn}>
-          <Link href="/validatetaskpage" passHref>
-            <Image
-              src={button1}
-              alt="Validate-Task-Button"
-              layout="fill"
-              objectFit="contain"
-            />
+          <Link href="/translateTaskPage">
+            <a>
+              <Image
+                src={button1}
+                alt="Validate-Task-Button"
+                layout="fill"
+                objectFit="contain"
+              />
+            </a>
+
           </Link>
           {/* <Image
             src={TranslateIcon}
@@ -63,13 +75,15 @@ export default function SideBarComponent(props: {
         </IconButton>
 
         <IconButton className={Styles.btn}>
-          <Link href="/validatetaskpage" passHref>
-            <Image
-              src={button2}
-              alt="Translate-Task-Button"
-              layout="fill"
-              objectFit="contain"
-            />
+          <Link href="/validatetaskpage">
+            <a>
+              <Image
+                src={button2}
+                alt="Translate-Task-Button"
+                layout="fill"
+                objectFit="contain"
+              />
+            </a>
           </Link>
         </IconButton>
       </div>

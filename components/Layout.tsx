@@ -8,17 +8,14 @@ type LayoutProps = {
   children?: React.ReactElement;
 };
 
-export default function Layout({ children, setUserAuth, setUserName }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <div className={Styles.line}></div>
 
       <div className={Styles.container}>
         <aside className={Styles.sideBar}>
-          <SideBarComponent
-            setUserAuth={setUserAuth}
-            setUserName={setUserName}
-          />
+          <SideBarComponent />
         </aside>
         <div className={Styles.content}>{children}</div>
       </div>

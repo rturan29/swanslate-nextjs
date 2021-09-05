@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
-import TaskCard from "../../components/TaskCard";
+import TaskCard from "../../components/TranslateTaskCard";
 
 const randomIndex = Math.floor(Math.random() * 100)
 
