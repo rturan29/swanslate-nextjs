@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     if ((globalThis)?.window) {
       const { Pi } = require("@pinetwork-js/sdk");
       console.log(process.env.NODE_ENV);
-      Pi?.init({ version: "2.0", sandbox: process.env.NODE_ENV == "development" });
+      Pi?.init({ version: "2.0", sandbox: true });
     }
   }, []);
 
