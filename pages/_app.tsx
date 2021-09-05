@@ -12,7 +12,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [state, dispatch] = useReducer(contextReducer, initialState);
 
   useEffect(() => {
-    getTranslateTasks().then(res => dispatch({ type: GET_TASKS, payload: res }));
+    getTranslateTasks().then(res => {
+      if (res)
+        dispatch({ type: GET_TASKS, payload: res });
+    });
   }, []);
 
   useEffect(() => {
