@@ -18,8 +18,6 @@ export default function Home() {
 
       <Layout>
         <>
-          {state.userInfo.isSignIn ? <h1 className={Styles.subContent}>Welcome {state.userInfo.userAuth.userName}</h1> : null}
-
           <h1 className={Styles.motto}>
             Beautiful Translations
             <br />

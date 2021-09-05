@@ -8,21 +8,19 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import React, { useContext, useState } from "react";
-import { ITasks } from "../lib/entities/IContext";
+import { ITasks, translateTask } from "../lib/entities/IContext";
 import AppContext from "../lib/helpers/appContext";
 import { UPDATE_TRANSLATE_TASKS } from "../lib/helpers/contextReducer";
 import Styles from "../styles/TranslateTaskCard.module.scss"
 
 type TaskCardProps = {
-  task: {
-    sentence: string;
-    id: number;
-  }
+  task: translateTask
 };
 
 export default function TranslateTaskCard({ task }: TaskCardProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [choosedLanguage, setChoosedLanguage] = useState("Choose a Language");
+  const [value, setValue] = useState("")
   const { state, dispatch } = useContext(AppContext)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -39,10 +37,16 @@ export default function TranslateTaskCard({ task }: TaskCardProps) {
   }
 
   function handleSubmitTranslate() {
-    dispatch({
+    if (value) {
+      dispatch({
       type: UPDATE_TRANSLATE_TASKS,
       payload: task.id
     });
+    }
+  }
+
+  function handleOnChangeValue(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
+    setValue(e.target.value);
   }
 
   return (
@@ -85,7 +89,7 @@ export default function TranslateTaskCard({ task }: TaskCardProps) {
             </MenuItem>
           </Menu>
         </div>
-        <TextField margin="dense" multiline={true} variant="outlined" />
+        <TextField margin="dense" multiline={true} variant="outlined" value={value} onChange={handleOnChangeValue} />
         <div className={Styles.buttonContainer}>
           <Button
             variant="contained"
@@ -96,7 +100,7 @@ export default function TranslateTaskCard({ task }: TaskCardProps) {
           </Button>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             className={Styles.button}
             onClick={handleSubmitTranslate}
           >

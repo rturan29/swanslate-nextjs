@@ -7,9 +7,12 @@ export interface IUserInfo {
     };
 }
 
+export type translateTask = { sentence: string, id: number; };
+export type validateTask = { originalText: string; translatedText: { [key: string]: string; }; id: number; }
+
 export interface ITasks {
-    translateTasks: Array<{ sentence: string; id: number; }>;
-    validationTasks: Array<{ originalText: string; translatedText: { [key: string]: string; }; id: number; }>;
+    translateTasks: Array<translateTask>;
+    validationTasks: Array<validateTask>;
 }
 
 export interface IContext {

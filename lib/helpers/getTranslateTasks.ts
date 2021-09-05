@@ -3,7 +3,7 @@ import { ITasks } from "../entities/IContext";
 
 export async function getTranslateTasks() {
     const randomIndexTranslate = Math.floor(Math.random() * 600);
-    const randomIndexValidate = Math.floor(Math.random() * 50);
+    const randomIndexValidate = Math.floor(Math.random() * 35);
 
     const response: { data: { data: ITasks; }; } = await axios.get(
         `https://swanslate-nextjs.vercel.app/api/translateTasks`

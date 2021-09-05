@@ -49,10 +49,13 @@ export default function SideBarComponent() {
 
         </Link>
       </IconButton>
-      <Button
+      {state.userInfo.isSignIn
+        ? <h1 className={Styles.UserName}>Welcome {state.userInfo.userAuth.userName}</h1>
+        : <Button
         color="secondary"
         variant="contained"
-        onClick={handleSignIn}>Sign In</Button>
+          onClick={handleSignIn}>Sign In</Button>}
+
       <div className={Styles.ButtonGroup}>
         <IconButton className={Styles.btn}>
           <Link href="/translateTaskPage">
