@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Layout from "../../components/Layout";
-import TaskCard from "../../components/TranslateTaskCard";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { taskReducer } from "../../redux/reducers/taskReducer";
+import TranslateTaskCard from "../../components/TranslateTaskCard";
+import AppContext from "../../lib/helpers/appContext";
 
-const randomIndex = Math.floor(Math.random() * 100);
 
-export default function TranslateTaskCard() {
-  // const translateTasks = useSelector<RootState>(state => state.tasks.translateTasks);
+
+
+export default function TranslateTaskPage() {
+  const { state } = useContext(AppContext)
 
   useEffect(() => {
 
@@ -17,11 +16,11 @@ export default function TranslateTaskCard() {
   return (
     <Layout>
       <div>
-        {/* {
-          (translateTasks as taskReducer["translateTasks"])?.length > 0
-            ? (translateTasks as taskReducer["translateTasks"]).slice(randomIndex, randomIndex + 3).map((task, i) => (<TaskCard id={i} key={i} task={task} />))
+        {
+          (state.tasks.translateTasks)?.length
+            ? (state.tasks.translateTasks).map((task, i) => (<TranslateTaskCard key={i} task={task} />))
             : null
-        } */}
+        }
       </div>
     </Layout>
   );

@@ -7,17 +7,23 @@ import {
   TextField,
 } from "@material-ui/core";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ITasks } from "../lib/entities/IContext";
+import AppContext from "../lib/helpers/appContext";
+import { UPDATE_TRANSLATE_TASKS } from "../lib/helpers/contextReducer";
 import Styles from "../styles/TranslateTaskCard.module.scss"
 
 type TaskCardProps = {
-  task: { sentence: string; },
-  id: string | number
+  task: {
+    sentence: string;
+    id: number;
+  }
 };
 
-export default function TaskCard({ task, id }: TaskCardProps) {
+export default function TranslateTaskCard({ task }: TaskCardProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [choosedLanguage, setChoosedLanguage] = useState("Choose a Language");
+  const { state, dispatch } = useContext(AppContext)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -32,12 +38,19 @@ export default function TaskCard({ task, id }: TaskCardProps) {
     setChoosedLanguage(e.target.innerText);
   }
 
+  function handleSubmitTranslate() {
+    dispatch({
+      type: UPDATE_TRANSLATE_TASKS,
+      payload: task.id
+    });
+  }
+
   return (
     <>
       <Card className={Styles.card} elevation={3}>
         <div className={Styles.cardContent}>
           <strong>Item Id: </strong>
-          <span>{id}</span>
+          <span>{task.id}</span>
           <Divider orientation="vertical" />
           <strong>Date:</strong>
           <span>{moment().format("MMM Do YY")}</span>
@@ -85,6 +98,7 @@ export default function TaskCard({ task, id }: TaskCardProps) {
             variant="contained"
             color="primary"
             className={Styles.button}
+            onClick={handleSubmitTranslate}
           >
             Submit
           </Button>

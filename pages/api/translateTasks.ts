@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import initialData from "./initialData.json";
 
-type Data = {
-    data: Array<{ sentence: string; }>
-};
+interface ITasks {
+    translateTasks: Array<{ sentence: string; }>;
+    validationTasks: Array<{ originalText: string; translatedText: { [key: string]: string; }; }>;
+}
 
 export default function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Data>
+    res: NextApiResponse<{ data: ITasks; }>
 ) {
     res.status(200).json(initialData);
 }
