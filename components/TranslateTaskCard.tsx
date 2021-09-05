@@ -42,7 +42,7 @@ export default function TranslateTaskCard({ task }: TaskCardProps) {
       type: UPDATE_TRANSLATE_TASKS,
       payload: task.id
     });
-setValue("")
+      setValue("")
     }
   }
 

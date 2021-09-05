@@ -22,11 +22,22 @@ export default function TranslateTaskCard({ task }: TaskCardProps) {
   const { state, dispatch } = useContext(AppContext);
   const [value, setValue] = useState("");
 
-  function handleSubmitTranslate() {
+  function handleApprove() {
     dispatch({
       type: UPDATE_VALIDATION_TASKS,
       payload: task.id
     });
+    setValue("");
+  }
+  function handleCorrectionSubmit() {
+    if (value) {
+      dispatch({
+        type: UPDATE_VALIDATION_TASKS,
+        payload: task.id
+      });
+      setValue("");
+    }
+
   }
 
 
@@ -68,6 +79,7 @@ export default function TranslateTaskCard({ task }: TaskCardProps) {
             variant="contained"
             color="secondary"
             className={Styles.button}
+            onClick={handleCorrectionSubmit}
           >
             Apply Correction
           </Button>
@@ -75,7 +87,7 @@ export default function TranslateTaskCard({ task }: TaskCardProps) {
             variant="contained"
             color="primary"
             className={Styles.button}
-            onClick={handleSubmitTranslate}
+            onClick={handleApprove}
           >
             Approve
           </Button>
