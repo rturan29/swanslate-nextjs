@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+// import { Pi } from "@pinetwork-js/sdk";
 import Link from "next/link";
 import { Button, IconButton, SvgIcon } from "@material-ui/core";
 import Image from "next/image";
@@ -9,28 +10,27 @@ import TaskPageIcon from "./icons/TaskPageIcon";
 import TranslateIcon from "../public/TranslateIcon.svg";
 import Styles from "../styles/SideBar.module.scss";
 
-
 export default function SideBarComponent(props: {
-  setUserAuth?: any;
-  setUserName?: any;
+  setUserAuth?: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserName?: React.Dispatch<React.SetStateAction<string>>;
 }) {
 
-  function handleSignIn() {
-    const scopes = ['payments'];
+  async function handleSignIn() {
+    await import("@pinetwork-js/sdk").then(async Pi => {
+      try {
+        const response = await Pi?.Pi?.authenticate(["username", "payments"], onIncompletePaymentFound);
 
-    function onIncompletePaymentFound(payment: any) { console.log(payment); };
-
-    (window as any).Pi?.authenticate(scopes, onIncompletePaymentFound).then((auth: any) => {
-      if (auth) {
-        props.setUserAuth(true);
-        props.setUserName(auth.username);
+        if (response?.user?.username) {
+          if (props.setUserAuth && props.setUserName) {
+            props.setUserAuth(true);
+            props.setUserName(response.user.username);
+          }
+        }
+      } catch (e) {
+        console.log("fetch error", e);
       }
-
-
-      console.log(`Hi there! You're ready to make payments!`);
-    }).catch(function (error: any) {
-      console.error(error);
     });
+    function onIncompletePaymentFound(payment: any) { console.log(payment); };
   }
 
   return (

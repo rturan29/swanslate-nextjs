@@ -10,6 +10,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
+          < meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         </Head>
         <body>
           <Main />

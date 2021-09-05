@@ -34,19 +34,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type TaskCardProps = {
-  key: string;
-  task: {
-    id: string;
-    date: string;
-    originalText: string;
-    translatedText: {
-      TR: string;
-      RU: string;
-    };
-  };
+  task: { sentence: string; },
+  key: string | number
 };
 
-export default function TaskCard({ task }: TaskCardProps) {
+export default function TaskCard({ task, key }: TaskCardProps) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [choosedLanguage, setChoosedLanguage] = useState("Choose a Language");
@@ -69,13 +61,13 @@ export default function TaskCard({ task }: TaskCardProps) {
       <Card className={classes.card} elevation={3}>
         <div className={classes.cardContent}>
           <strong>Item Id: </strong>
-          <span>{task.id}</span>
+          <span>{key}</span>
           <Divider orientation="vertical" />
           <strong>Time:</strong>
-          <span>{task.date}</span>
+          <span>{ }</span>
           <p>
             <strong>Original Text: </strong>
-            {task.originalText}
+            {task.sentence}
           </p>
         </div>
 

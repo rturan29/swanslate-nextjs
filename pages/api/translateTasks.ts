@@ -2,15 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import initialData from "./initialData.json";
 
 type Data = {
-    [id: string]: {
-        id: string,
-        date: string,
-        originalText: string;
-        translatedText: {
-            TR: string,
-            RU: string;
-        };
-    };
+    data: Array<{ sentence: string; }>
 };
 
 export default function handler(

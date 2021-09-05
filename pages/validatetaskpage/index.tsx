@@ -4,15 +4,13 @@ import axios from "axios";
 import TaskCard from "../../components/TaskCard";
 
 export default function ValidateTaskPage() {
-  const [translateTasks, setTranslateTasks] = useState<Data | {}>({});
+  const [translateTasks, setTranslateTasks] = useState<Data>([]);
 
   async function getTranslateTasks() {
     const response = await axios.get(
       `https://swanslate-nextjs.vercel.app/api/translateTasks`
     );
-
     const data: Data = response.data;
-
     return data;
   }
 
@@ -23,9 +21,9 @@ export default function ValidateTaskPage() {
   return (
     <Layout>
       <div>
-        {Object.values(translateTasks)?.length
-          ? Object.values(translateTasks)?.map(task => (
-              <TaskCard key={task.id} task={task} />
+        {translateTasks?.length
+          ? Object.values(translateTasks)?.map((task, i) => (
+            <TaskCard key={i} task={task} />
             ))
           : null}
       </div>
@@ -33,14 +31,4 @@ export default function ValidateTaskPage() {
   );
 }
 
-export type Data = {
-  [id: string]: {
-    id: string;
-    date: string;
-    originalText: string;
-    translatedText: {
-      TR: string;
-      RU: string;
-    };
-  };
-};
+export type Data = Array<{ sentence: string; }>
