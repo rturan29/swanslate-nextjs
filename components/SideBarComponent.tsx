@@ -63,7 +63,7 @@ export default function SideBarComponent() {
 
       <div className={Styles.ButtonGroup}>
         <IconButton className={Styles.btn}>
-          <Link href="/translateTaskPage">
+          <Link href="/translateTasks">
             <a>
               <Image
                 src={button1}
@@ -83,7 +83,7 @@ export default function SideBarComponent() {
         </IconButton>
 
         <IconButton className={Styles.btn}>
-          <Link href="/validatetaskpage">
+          <Link href="/validateTasks">
             <a>
               <Image
                 src={button2}
