@@ -3,6 +3,8 @@ import Layout from "../../components/Layout";
 import axios from "axios";
 import TaskCard from "../../components/TaskCard";
 
+const randomIndex = Math.floor(Math.random() * 100)
+
 export default function ValidateTaskPage() {
   const [translateTasks, setTranslateTasks] = useState<Data>([]);
 
@@ -10,7 +12,7 @@ export default function ValidateTaskPage() {
     const response = await axios.get(
       `https://swanslate-nextjs.vercel.app/api/translateTasks`
     );
-    const data: Data = response.data;
+    const data: Data = response.data.data;
     return data;
   }
 
@@ -21,11 +23,11 @@ export default function ValidateTaskPage() {
   return (
     <Layout>
       <div>
-        {translateTasks?.length
-          ? Object.values(translateTasks)?.map((task, i) => (
-            <TaskCard key={i} task={task} />
-            ))
-          : null}
+        {
+          translateTasks?.length > 0
+            ? translateTasks.slice(randomIndex, randomIndex + 3).map((task, i) => (<TaskCard key={i} task={task} />))
+            : null
+        }
       </div>
     </Layout>
   );

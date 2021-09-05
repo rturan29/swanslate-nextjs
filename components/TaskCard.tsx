@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Data } from "../pages/validatetaskpage";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -67,7 +67,7 @@ export default function TaskCard({ task, key }: TaskCardProps) {
           <span>{ }</span>
           <p>
             <strong>Original Text: </strong>
-            {task.sentence}
+            {task?.sentence}
           </p>
         </div>
 
