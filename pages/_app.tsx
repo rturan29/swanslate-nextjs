@@ -8,7 +8,7 @@ import theme from "../lib/theme";
 
 if ((globalThis)?.window) {
   var Pi = require("@pinetwork-js/sdk");
-  Pi?.Pi?.init({ version: "2.0", sandbox: process.env.ENV == "development" });
+  Pi?.Pi?.init({ version: "2.0", sandbox: process.env.NODE_ENV == "development" });
 }
 
 function MyApp({ Component, pageProps }: AppProps) {

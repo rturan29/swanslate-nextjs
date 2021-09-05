@@ -7,8 +7,9 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles, Theme } from "@material-ui/core/styles";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Data } from "../pages/validatetaskpage";
+
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -35,10 +36,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type TaskCardProps = {
   task: { sentence: string; },
-  key: string | number
+  id: string | number
 };
 
-export default function TaskCard({ task, key }: TaskCardProps) {
+export default function TaskCard({ task, id }: TaskCardProps) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [choosedLanguage, setChoosedLanguage] = useState("Choose a Language");
@@ -61,10 +62,10 @@ export default function TaskCard({ task, key }: TaskCardProps) {
       <Card className={classes.card} elevation={3}>
         <div className={classes.cardContent}>
           <strong>Item Id: </strong>
-          <span>{key}</span>
+          <span>{id}</span>
           <Divider orientation="vertical" />
-          <strong>Time:</strong>
-          <span>{ }</span>
+          <strong>Date:</strong>
+          <span>{moment().format("MMM Do YY")}</span>
           <p>
             <strong>Original Text: </strong>
             {task?.sentence}

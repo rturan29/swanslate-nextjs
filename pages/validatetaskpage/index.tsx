@@ -25,7 +25,7 @@ export default function ValidateTaskPage() {
       <div>
         {
           translateTasks?.length > 0
-            ? translateTasks.slice(randomIndex, randomIndex + 3).map((task, i) => (<TaskCard key={i} task={task} />))
+            ? translateTasks.slice(randomIndex, randomIndex + 3).map((task, i) => (<TaskCard id={i} key={i} task={task} />))
             : null
         }
       </div>
