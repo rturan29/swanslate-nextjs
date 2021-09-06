@@ -15,7 +15,7 @@ export default function ValidateTaskPage() {
       <div>
         {
           (state.tasks.validationTasks)?.length
-            ? (state.tasks.validationTasks).slice(0, 3).map((task, i) => (<ValidateTaskCard key={i} task={task} />))
+            ? (state.tasks.validationTasks).slice(0, 3).map(task => (<ValidateTaskCard key={task.id} task={task} />))
             : null
         }
       </div>

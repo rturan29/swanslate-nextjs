@@ -16,7 +16,7 @@ export default function TranslateTaskPage() {
       <div>
         {
           (state.tasks.translateTasks)?.length
-            ? (state.tasks.translateTasks).slice(0, 3).map((task, i) => (<TranslateTaskCard key={i} task={task} />))
+            ? (state.tasks.translateTasks).slice(0, 3).map(task => (<TranslateTaskCard key={task.id} task={task} />))
             : null
         }
       </div>
